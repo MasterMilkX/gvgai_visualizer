@@ -10,7 +10,6 @@ file_path: VGDL game description file
 level_path: ascii level description file  
 tile_size (optional): size of tiles for rendering  
 
-
 To render a level from atdelphi_plus results:
 ```bash
 python result_visualizer.py game_name result_level_path [tile render size]
