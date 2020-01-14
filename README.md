@@ -1,7 +1,7 @@
 # gvgai_visualizer 2.0
 Render Levels Created for GVGAI
 
-**To render a level with test.py: **
+**To render a level with test.py:**
 ```bash 
 python test.py file_path level_path [tile_size]
 ```
