@@ -16,6 +16,14 @@ TILE_SIZE = 16
 if len(sys.argv) > 3:
 	TILE_SIZE = int(sys.argv[3])
 
+REALNAME = sys.argv[1]
+if len(sys.argv) > 4:
+	REALNAME = sys.argv[4]
+
+EMPTY_STRING = "."
+if len(sys.argv) > 5:
+	EMPTY_STRING = sys.argv[5]
+
 #import the level visualizer
 lv = LevelVisualizer(VGDL, TILE_SIZE)
 
@@ -25,7 +33,11 @@ if not os.path.exists(img_dir):
 	os.mkdir(img_dir)		
 
 #get all the levels
-LEVELS = [f for f in os.listdir(LEVEL_DIR) if os.path.isfile(os.path.join(LEVEL_DIR, f)) and sys.argv[1] in f]
+LEVELS = [f for f in os.listdir(LEVEL_DIR) if os.path.isfile(os.path.join(LEVEL_DIR, f)) and REALNAME in f]
+
+#sort the levels by name
+LEVELS = sorted(LEVELS)
+print(LEVELS)
 
 fs = []
 #create the level image representations
@@ -58,8 +70,8 @@ for LEVEL in LEVELS:
 	if(len(actual_level) == 0):
 		continue
 
-	level_str = "".join(actual_level).strip().replace(" ", ".")
-	#print(level_str)
+	level_str = "".join(actual_level).strip().replace(" ", EMPTY_STRING)
+	print(level_str)
 
 	#run the module for the level visualization
 	img = lv.draw_level(level_str)
