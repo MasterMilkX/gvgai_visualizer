@@ -33,7 +33,7 @@ if not os.path.exists(img_dir):
 	os.mkdir(img_dir)		
 
 #get all the levels
-LEVELS = [f for f in os.listdir(LEVEL_DIR) if os.path.isfile(os.path.join(LEVEL_DIR, f)) and REALNAME in f]
+LEVELS = [f for f in os.listdir(LEVEL_DIR) if os.path.isfile(os.path.join(LEVEL_DIR, f)) and REALNAME in f and ".txt" in f]
 
 #sort the levels by name
 LEVELS = sorted(LEVELS)
@@ -70,14 +70,14 @@ for LEVEL in LEVELS:
 	if(len(actual_level) == 0):
 		continue
 
-	level_str = "".join(actual_level).strip().replace(" ", EMPTY_STRING)
+	level_str = "".join(actual_level).replace(" ", EMPTY_STRING).strip()
 	print(level_str)
 
 	#run the module for the level visualization
 	img = lv.draw_level(level_str)
 
 	#save the level
-	img.save(os.path.join(img_dir,binval+".png"),format='png')
+	img.save(os.path.join(img_dir,LEVEL.replace(".txt",".png")),format='png')
 	fs.append(img)
 
 
@@ -96,8 +96,8 @@ x,y = fs[0].size
 print(str(len(fs)) + " images @ " + str(x)+" x "+str(y))
 
 #set up the grids
-ncol = int(math.sqrt(len(fs)))
-nrow = int(len(fs) / ncol)
+nrow = int(math.sqrt(len(fs)))
+ncol = int(len(fs) / nrow)
 if len(fs) % ncol != 0:
 	nrow += 1
 
